@@ -1,0 +1,7 @@
+#Generate random matrix X (100x3) and vector y ( with length 100, as required)
+X = rand(Float64, (100, 3))
+y = rand(100)
+
+# Compute β using the formula provided
+β = inv(X' * X) * (X' * y)
+println(β)
