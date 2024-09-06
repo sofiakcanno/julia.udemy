@@ -1,0 +1,8 @@
+#Crete a tuple
+personal_info=("Soia Pantoja",25,"Black","Horchata")
+#Print the tuple
+println(personal_info)
+#Extract and print from the tuple
+name, _, color, _ = personal_info
+println("Name: ", name)
+println("Favorite Color: ", color)
