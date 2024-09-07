@@ -1,0 +1,16 @@
+#Initialise 
+fibonacci = zeros(Int, n) #we create an array of zeros
+#Base cases
+if n >= 1
+        fibonacci[1] = 1  # First Fibonacci number
+    end
+    if n >= 2
+        fibonacci[2] = 1  # Second Fibonacci number
+    end
+#Loop to calculate Fibonacci
+for i in 3:n
+        fibonacci[i] = fib[i - 1] + fibonacci[i - 2]  # Sum of the two preceding numbers
+    end
+    
+    return fibonacci
+end
