@@ -1,4 +1,5 @@
 #Initialise 
+n=10
 fibonacci = zeros(Int, n) #we create an array of zeros
 #Base cases
 if n >= 1
@@ -9,7 +10,7 @@ if n >= 1
     end
 #Loop to calculate Fibonacci
 for i in 3:n
-        fibonacci[i] = fib[i - 1] + fibonacci[i - 2]  # Sum of the two preceding numbers
+        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2]  # Sum of the two preceding numbers
     end
     
     return fibonacci
