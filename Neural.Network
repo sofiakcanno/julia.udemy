@@ -1,52 +1,50 @@
-#Neural networks 
-#Initialize matrix where row number equals output number and column number equals input number
+# Defining struct Layer
 mutable struct Layer
-  w::Array{Float64,2}
+    w::Array{Float64,2}
 end
 
-Layer(input::Int,output::Int)=Layer(rand(Float64,(output,input)))
+# Constructor to inicialize the weight o the layers 
+Layer(input::Int, output::Int) = Layer(rand(Float64, (output, input)))
 
-#Function on the layer to calculate the output
-(l::Layer)(x)=(l.w*x)
+# Function to calculate a layer given the input
+(l::Layer)(x) = (l.w * x)
 
-#Define 3 Layers
+# Defining layers
+l1 = Layer(3, 4)
+l2 = Layer(4, 3)
+l3 = Layer(3, 1)
 
-l1=Layer(3,4)
-l1.w
-l2=Layer(4,3)
-l2.w
-l3=Layer(3,1)
-l3.w
+# Defining the initial vector
+x = [5.0, 7.0, 9.0]
 
-#Define input vector
+# Calculating values 
+l1_values = l1(x)
+l2_values = l2(l1_values)
+y = l3(l2_values)
 
-x=[5,7,9]
-
-#Calculate the values
-
-l1_values=l1(x)
-l2_values=l2(l1_values)
-y=l3(l2_values)
-
-#We define a network
-
+# Defining the estructure mutable Network
 mutable struct Network
-  layers 
-  Network(layers...)=new(layers)
+    layers::Vector{Layer}  # Layers is a vector
+    Network(layers::Layer...) = new(collect(layers))
 end
 
-#Function does all the calculations on the nodes in just one call
+# Function that does all the calculations in one-single call
+function (n::Network)(x)
+    for l in n.layers
+        x = l(x)  # Calculating the output of each layer cosidering the previous value
+    end
+    return x  # Final result
+end
 
-(n::Network)(x)-(for l in n.layers;x-l(x);end;x)
+# We create a neural network with the layers
+nn = Network(l1, l2, l3)
 
-nn=Network(l1,l2,l3)
-
-#Checking layers 
-
+# Verify the weights of the layers
 nn.layers[1].w
 nn.layers[2].w
 nn.layers[3].w
 
-#Final result
+# Final result with input x
+result = nn(x)
+println("Resultado final: ", result)
 
-nn(x)
